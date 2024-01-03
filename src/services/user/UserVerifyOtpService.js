@@ -14,7 +14,8 @@ const UserVerifyOtpService = async (Request, DataModel) => {
         }
 
     } catch (error) {
-        return { status: 'fail', data: error.toString() };
+        console.error('Error in user verify Otp service', error);
+        return { status: 'fail', data: 'An error occurred while verifying OTP.' };
     }
 }
 

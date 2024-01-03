@@ -14,4 +14,6 @@ app.listen(port, async () => {
     await dbConnection();
     console.log(`Running http://localhost:${port}`);
 
-})
+});
+
+

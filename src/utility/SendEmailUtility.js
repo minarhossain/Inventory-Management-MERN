@@ -24,7 +24,7 @@ const sendEmailUtility = async (EmailTo, EmailText, EmailSubject) => {
     }
 
     const result = await transporter.sendMail(mailOptions);
-    console.log(result);
+    // console.log(result);
 }
 
 module.exports = sendEmailUtility;

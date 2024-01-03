@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const AuthVerify = (req, res, next) => {
     const token = req.headers['token'];
-    console.log(token);
+    // console.log(token);
 
     if (!token) {
         return res.status(401).json({ status: 'fail', message: 'Unauthorized: No token provided' });
@@ -15,7 +15,7 @@ const AuthVerify = (req, res, next) => {
         }
 
         const email = decoded['data'];
-        console.log('Decoded email:', email);
+        // console.log('Decoded email:', email);
 
         // Add the email to request headers for further use in routes
         req.headers.email = email;

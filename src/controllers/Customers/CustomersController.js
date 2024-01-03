@@ -26,6 +26,6 @@ exports.CustomersList = async (req, res) => {
 
 
 exports.CustomersDropDown = async (req, res) => {
-    const result = await DropDownService(req, CustomersModel, { _id: 1, Name: 1 });
+    const result = await DropDownService(req, CustomersModel, { _id: 1, CustomerName: 1 });
     res.status(200).json(result);
 }
