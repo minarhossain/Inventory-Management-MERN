@@ -1,8 +1,11 @@
+const { default: mongoose } = require("mongoose");
 const BrandsModel = require("../../models/Brands/BrandsModel")
 const CreateService = require("../../services/common/CreateService");
 const DropDownService = require("../../services/common/DropDownService");
 const ListService = require("../../services/common/ListService");
 const UpdateService = require("../../services/common/UpdateService");
+const CheckAssociateService = require("../../services/common/CheckAssociateService");
+const ProductsModel = require("../../models/Products/ProductsModel");
 
 
 
@@ -27,4 +30,19 @@ exports.BrandList = async (req, res) => {
 exports.BrandDropDown = async (req, res) => {
     const result = await DropDownService(req, BrandsModel, { _id: 1, Name: 1 });
     res.status(200).json(result);
+}
+
+
+
+exports.DeleteBrand = async (req, res) => {
+    const DeleteId = req.params.id;
+    const ObjectId = mongoose.Types.ObjectId;
+
+    const CheckAssociate = await CheckAssociateService({ BrandId: ObjectId(DeleteId) }, ProductsModel);
+    if (CheckAssociate) {
+        res.status(200).json({ status: 'associate', data: 'Associate with Product' });
+    } else {
+        const result = await DeleteService(req, BrandsModel);
+        res.status(200).json(result);
+    }
 }

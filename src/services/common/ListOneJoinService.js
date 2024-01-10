@@ -22,6 +22,8 @@ const ListOneJoinService = async (Request, DataModel, SearchArray, JoinStage) =>
         } else {
             data = await DataModel.aggregate([
                 { $match: { UserEmail: UserEmail } },
+                // defining after chatGPT
+                // JoinStage,
 
                 { $match: { $or: SearchArray } },
                 {

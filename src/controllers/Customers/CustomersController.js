@@ -1,9 +1,13 @@
 
+const { default: mongoose } = require("mongoose");
 const CustomersModel = require("../../models/Customers/CustomersModel");
 const CreateService = require("../../services/common/CreateService");
 const DropDownService = require("../../services/common/DropDownService");
 const ListService = require("../../services/common/ListService");
 const UpdateService = require("../../services/common/UpdateService");
+const CheckAssociateService = require("../../services/common/CheckAssociateService");
+const DeleteService = require("../../services/common/DeleteService");
+const SalesModel = require("../../models/Sales/SalesModel");
 
 
 
@@ -28,4 +32,18 @@ exports.CustomersList = async (req, res) => {
 exports.CustomersDropDown = async (req, res) => {
     const result = await DropDownService(req, CustomersModel, { _id: 1, CustomerName: 1 });
     res.status(200).json(result);
+}
+
+
+exports.DeleteCustomer = async (req, res) => {
+    const DeleteId = req.params.id;
+    const ObjectId = mongoose.Types.ObjectId;
+
+    const CheckAssociate = await CheckAssociateService({ CustomerId: ObjectId(DeleteId) }, SalesModel);
+    if (CheckAssociate) {
+        res.status(200).json({ status: 'associate', data: 'Associate with Product' });
+    } else {
+        const result = await DeleteService(req, CustomersModel);
+        res.status(200).json(result);
+    }
 }
