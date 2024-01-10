@@ -3,6 +3,7 @@ const ExpenseTypesModel = require("../../models/Expenses/ExpenseTypesModel");
 const CheckAssociateService = require("../../services/common/CheckAssociateService");
 const CreateService = require("../../services/common/CreateService");
 const DeleteService = require("../../services/common/DeleteService");
+const DetailsByIdService = require("../../services/common/DetailsByIdService");
 const DropDownService = require("../../services/common/DropDownService");
 const ListService = require("../../services/common/ListService");
 const UpdateService = require("../../services/common/UpdateService");
@@ -18,6 +19,12 @@ exports.UpdateExpenseTypes = async (req, res) => {
     const result = await UpdateService(req, ExpenseTypesModel);
     res.status(200).json(result);
 }
+
+exports.ExpenseTypesDetailsById = async (req, res) => {
+    const result = await DetailsByIdService(req, ExpenseTypesModel, { _id: 1, Name: 1 });
+    res.status(200).json(result);
+}
+
 
 exports.ExpenseTypesList = async (req, res) => {
     const searchRgx = { '$regex': req.params.searchKeyword, '$options': 'i' };

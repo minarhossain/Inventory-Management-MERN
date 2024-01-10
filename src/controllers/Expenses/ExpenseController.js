@@ -1,6 +1,7 @@
 const ExpenseModel = require("../../models/Expenses/ExpenseModel")
 const CreateService = require("../../services/common/CreateService");
 const DeleteService = require("../../services/common/DeleteService");
+const DetailsByIdService = require("../../services/common/DetailsByIdService");
 const ListOneJoinService = require("../../services/common/ListOneJoinService");
 const UpdateService = require("../../services/common/UpdateService");
 
@@ -16,6 +17,10 @@ exports.UpdateExpense = async (req, res) => {
     res.status(200).json(result);
 }
 
+exports.ExpenseDetailsById = async (req, res) => {
+    const result = await DetailsByIdService(req, ExpenseModel, { _id: 1, Name: 1 });
+    res.status(200).json(result);
+}
 
 exports.ExpensesList = async (req, res) => {
     const searchRgx = { '$regex': req.params.searchKeyword, '$options': 'i' };

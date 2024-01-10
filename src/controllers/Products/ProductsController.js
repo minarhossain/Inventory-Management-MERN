@@ -8,6 +8,7 @@ const ReturnProductsModel = require("../../models/Returns/ReturnProductsModel");
 const PurchaseProductsModel = require("../../models/Purchases/PurchasesModel");
 const SaleProductsModel = require("../../models/Sales/SaleProductsModel");
 const DeleteService = require("../../services/common/DeleteService");
+const DetailsByIdService = require("../../services/common/DetailsByIdService");
 
 
 
@@ -35,6 +36,11 @@ exports.ProductsList = async (req, res) => {
     res.status(200).json(result)
 };
 
+
+exports.ProductsDetailsById = async (req, res) => {
+    const result = await DetailsByIdService(req, ProductsModel, { _id: 1, Name: 1 });
+    res.status(200).json(result);
+}
 
 exports.DeleteProduct = async (req, res) => {
     const DeleteId = req.params.id;

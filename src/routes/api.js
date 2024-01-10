@@ -1,13 +1,13 @@
 const express = require('express');
 const { Registration, Login, ProfileUpdate, ProfileDetails, RecoverVerifyEmail, RecoverVerifyOTP, RecoverResetPass } = require('../controllers/Users/UsersController');
 const AuthVerify = require('../middlewares/AuthVerifyMiddleware');
-const { CreateBrand, UpdateBrand, BrandList, BrandDropDown, DeleteBrand } = require('../controllers/Brands/BrandsController');
-const { CreateCategories, UpdateCategories, CategoriesList, CategoriesDropDown, DeleteCategories } = require('../controllers/Categories/CategoriesController');
-const { CreateCustomers, UpdateCustomers, CustomersList, CustomersDropDown, DeleteCustomer } = require('../controllers/Customers/CustomersController');
-const { CreateSuppliers, UpdateSuppliers, SuppliersList, SuppliersDropDown, DeleteSupplier } = require('../controllers/Suppliers/SuppliersController');
-const { CreateExpenseTypes, UpdateExpenseTypes, ExpenseTypesList, ExpenseTypesDropDown, DeleteExpenseTypes } = require('../controllers/Expenses/ExpenseTypesController');
-const { CreateExpenses, UpdateExpense, ExpensesList, DeleteExpense } = require('../controllers/Expenses/ExpenseController');
-const { CreateProducts, UpdateProduct, ProductsList, DeleteProduct } = require('../controllers/Products/ProductsController');
+const { CreateBrand, UpdateBrand, BrandList, BrandDropDown, DeleteBrand, BrandDetailsById } = require('../controllers/Brands/BrandsController');
+const { CreateCategories, UpdateCategories, CategoriesList, CategoriesDropDown, DeleteCategories, CategoriesDetailsById } = require('../controllers/Categories/CategoriesController');
+const { CreateCustomers, UpdateCustomers, CustomersList, CustomersDropDown, DeleteCustomer, CustomerDetailsById } = require('../controllers/Customers/CustomersController');
+const { CreateSuppliers, UpdateSuppliers, SuppliersList, SuppliersDropDown, DeleteSupplier, SuppliersDetailsById } = require('../controllers/Suppliers/SuppliersController');
+const { CreateExpenseTypes, UpdateExpenseTypes, ExpenseTypesList, ExpenseTypesDropDown, DeleteExpenseTypes, ExpenseTypesDetailsById } = require('../controllers/Expenses/ExpenseTypesController');
+const { CreateExpenses, UpdateExpense, ExpensesList, DeleteExpense, ExpenseDetailsById } = require('../controllers/Expenses/ExpenseController');
+const { CreateProducts, UpdateProduct, ProductsList, DeleteProduct, ProductsDetailsById } = require('../controllers/Products/ProductsController');
 const { CreatePurchases, PurchasesList, PurchaseDelete } = require('../controllers/Purchases/PurchasesController');
 const { CreateSales, SalesList, SaleDelete } = require('../controllers/Sales/SalesController');
 const { CreateReturns, ReturnsList, ReturnDelete } = require('../controllers/Returns/ReturnsController');
@@ -32,7 +32,8 @@ router.post('/CreateBrand', AuthVerify, CreateBrand);
 router.post('/UpdateBrand/:id', AuthVerify, UpdateBrand);
 router.get('/BrandList/:pageNo/:perPage/:searchKeyword', AuthVerify, BrandList);
 router.get('/BrandDropdown', AuthVerify, BrandDropDown);
-router.get('/DeleteBrand/:id', AuthVerify, DeleteBrand)
+router.get('/DeleteBrand/:id', AuthVerify, DeleteBrand);
+router.get('/BrandDetailsById/:id', AuthVerify, BrandDetailsById)
 
 
 // categories
@@ -41,7 +42,7 @@ router.post('/UpdateCategories/:id', AuthVerify, UpdateCategories);
 router.get('/CategoriesList/:pageNo/:perPage/:searchKeyword', AuthVerify, CategoriesList);
 router.get('/CategoriesDropDown', AuthVerify, CategoriesDropDown);
 router.get('/DeleteCategories/:id', AuthVerify, DeleteCategories);
-
+router.get('/CategoriesDetailsById/:id', AuthVerify, CategoriesDetailsById)
 
 // customers
 router.post('/CreateCustomers', AuthVerify, CreateCustomers);
@@ -49,6 +50,7 @@ router.post('/UpdateCustomers/:id', AuthVerify, UpdateCustomers);
 router.get('/CustomersList/:pageNo/:perPage/:searchKeyword', AuthVerify, CustomersList);
 router.get('/CustomersDropDown', AuthVerify, CustomersDropDown);
 router.get('/DeleteCustomer/:id', AuthVerify, DeleteCustomer);
+router.get('/CustomerDetailsById/:id', AuthVerify, CustomerDetailsById);
 
 
 // suppliers
@@ -57,6 +59,7 @@ router.post('/UpdateSuppliers/:id', AuthVerify, UpdateSuppliers);
 router.get('/SuppliersList/:pageNo/:perPage/:searchKeyword', AuthVerify, SuppliersList);
 router.get('/SuppliersDropDown', AuthVerify, SuppliersDropDown);
 router.get('/DeleteSupplier/:id', AuthVerify, DeleteSupplier);
+router.get('/SuppliersDetailsById/:id', AuthVerify, SuppliersDetailsById);
 
 
 // ExpenseTypes
@@ -65,6 +68,7 @@ router.post('/UpdateExpenseTypes/:id', AuthVerify, UpdateExpenseTypes);
 router.get('/ExpenseTypesList/:pageNo/:perPage/:searchKeyword', AuthVerify, ExpenseTypesList);
 router.get('/ExpenseTypesDropDown', AuthVerify, ExpenseTypesDropDown);
 router.get('/DeleteExpenseTypes/:id', AuthVerify, DeleteExpenseTypes);
+router.get('/ExpenseTypesDetailsById', AuthVerify, ExpenseTypesDetailsById);
 
 
 // Expense
@@ -72,6 +76,7 @@ router.post('/CreateExpense', AuthVerify, CreateExpenses);
 router.post('/UpdateExpense/:id', AuthVerify, UpdateExpense);
 router.get('/ExpensesList/:pageNo/:perPage/:searchKeyword', AuthVerify, ExpensesList);
 router.get('/DeleteExpense/:id', AuthVerify, DeleteExpense);
+router.get('/ExpenseDetailsById/:id', AuthVerify, ExpenseDetailsById);
 
 
 // Products
@@ -79,6 +84,7 @@ router.post('/CreateProducts', AuthVerify, CreateProducts);
 router.post('/UpdateProduct/:id', AuthVerify, UpdateProduct);
 router.get("/ProductsList/:pageNo/:perPage/:searchKeyword", AuthVerify, ProductsList);
 router.get('/DeleteProduct', AuthVerify, DeleteProduct);
+router.get('/ProductsDetailsById/:id', AuthVerify, ProductsDetailsById);
 
 
 // Purchase

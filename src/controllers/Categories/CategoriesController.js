@@ -8,6 +8,7 @@ const DeleteService = require("../../services/common/DeleteService");
 const DropDownService = require("../../services/common/DropDownService");
 const ListService = require("../../services/common/ListService");
 const UpdateService = require("../../services/common/UpdateService");
+const DetailsByIdService = require("../../services/common/DetailsByIdService");
 
 
 
@@ -28,6 +29,10 @@ exports.CategoriesList = async (req, res) => {
     res.status(200).json(result);
 }
 
+exports.CategoriesDetailsById = async (req, res) => {
+    const result = await DetailsByIdService(req, CategoriesModel, { _id: 1, Name: 1 });
+    res.status(200).json(result);
+}
 
 exports.CategoriesDropDown = async (req, res) => {
     const result = await DropDownService(req, CategoriesModel, { _id: 1, Name: 1 });
